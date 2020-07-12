@@ -1,0 +1,111 @@
+*
+{
+    margin:0;
+    padding:0;
+  
+}
+body{
+  min-height: 100vh;
+  background-image: linear-gradient(to right,#05D6D9,#F907FC);
+}
+.container
+{
+    height:100%;
+    width:100%;
+   
+    background-position:center;
+    background-size:cover;
+    position:absolute;
+
+}
+.form
+{
+    width:380px;
+    height:480px;
+    position:relative;
+    margin:6% auto;
+    background:#111111;
+    padding:5px;
+    overflow:hidden;
+	opacity:0.7;
+}
+.button
+{
+    width:220px;
+    margin:35px auto;
+    position:relative;
+    
+    border-radius:30px;
+	font-weight: bold;
+	color:white;
+
+}
+.toggle-btn
+{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position:relative;
+	font-weight: bold;
+	color:white;
+}
+#btn
+{
+    top: 0;
+    left: 0;
+    position:absolute;
+    width:110px;
+    height:100%;
+    background: linear-gradient(to right,#05D6D9,#F907FC);
+    border-radius:30px;
+    transition:.5s;
+	color:white;
+	
+}
+.input-group
+{
+    top:180px;
+    position:absolute;
+    width: 280px;
+    transition:0.5s;
+	font-weight: bold;
+	color:white;
+    
+}
+.input-field
+{
+    width:100%;
+    padding:10px 0;
+    margin:5px 0;
+    border-left:0;
+    border-top:0;
+    border-right:0;
+    border-bottom:1px solid #999;
+    outline:none;
+    background: transparent;
+}
+.submit-btn
+{
+    width:85%;
+    padding:10px 30px;
+    cursor:pointer;
+    display:block;
+    margin:auto;
+    background:linear-gradient(to right,#05D6D9,#F907FC);
+    border:0;
+    outline:none;
+    border-radius:30px;
+	font-weight: bold;
+	color:white;
+}
+#login
+{
+    left:50px;
+}
+#register
+{
+    left:450px;
+}
+
