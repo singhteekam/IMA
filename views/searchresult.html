@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>IMA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<style>
+    a.logo {
+        color: aliceblue;
+    }
+
+    .navbar {
+        padding: .7rem;
+    }
+
+    .navbar-toggler-icon {
+        color: aliceblue;
+    }
+
+    .navbar-nav li {
+        padding-right: 14px;
+    }
+
+    .nav-link {
+        font-size: 1.1rem !important;
+    }
+
+    .navbar-nav li a {
+        color: white;
+    }
+
+    .navbar-expand-md {
+        background: rgb(59, 59, 59);
+        padding: 8px;
+        font-size: 57px;
+    }
+
+    a.nav-link:hover {
+        background-color: black;
+        color: white;
+    }
+
+    body {
+        background: #181818;
+        color: white;
+    }
+
+    * {
+        margin: 0.5%;
+    }
+
+    #heading {
+        text-align: center;
+    }
+
+    .table-hover tbody tr:hover {
+        background: #404040;
+        color: white;
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+
+        color: white;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-md sticky-top">
+        <div class="container-fluid">
+            <a href="" class="logo">
+                <h3>IMA</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navBarRes">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navBarRes">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="/" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">Help</a></li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="/search">Search user</a>
+                            <a class="dropdown-item" href="#">Add user</a>
+                            <a class="dropdown-item" href="#">Delete user</a>
+
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <% datas.forEach(function (data) { %>
+
+    <h1 id="heading">DASHBOARD</h1>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col" align="center">
+                    <img src="https://miro.medium.com/max/560/1*MccriYX-ciBniUzRKAUsAw.png" alt="Profile pic"
+                        height="75%" width="15%">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" align="center">
+                    <h3><%= data.username %></h3>
+                </div>
+            </div>
+            <table class="table table-hover text-white">
+                <tbody>
+                    <tr>
+                        <th scope="col">UserName</th>
+                        <td><%= data.username %></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email</th>
+                        <td><%= data.email %></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Phone</th>
+                        <td><%= data.phone %></td>
+                    </tr>
+                    <hr>
+                </tbody>
+            </table>
+        </div>
+        <div class="button" align="center"><button type="submit" class="btn btn-success">Update</button></div>
+        <div class="row">
+            <footer class="col-md-12 fixed-bottom bg-dark text-white" align="center"><span>Team Members :&nbsp Sweta
+                    Kumari,&nbsp Simran Gupta,&nbsp Sneha Goel,&nbsp Teekam Singh</span></footer>
+        </div>
+
+        <% }) %>
+</body>
+
+</html>
