@@ -119,6 +119,36 @@ const nodemailer= require('nodemailer');
                             }).save((err, data) => {
                                 if (err) throw err;
                                 req.flash('success_message', "New Teacher account created successfully..");
+
+                                let transporter = nodemailer.createTransport({
+                                    service: 'Gmail',
+                                    auth: {
+                                        user: process.env.USER_MAIL, // generated ethereal user
+                                        pass: process.env.USER_PASS // generated ethereal password
+                                    },
+                                    tls: {
+                                        rejectUnauthorized: false
+                                    }
+                                });
+                   
+                                let mailOptions = {
+                                    from: req.body.emailAddress,
+                                    to: email, // list of receivers
+                                    subject: 'Account Created', // Subject line
+                                    text: "Congratulations...Your account has been created successfully..\nAccount Info:\nUsername: "+ username+"\nEmail: "+ email+ 
+                                    "\nMobile:"+ mobile+ "\nPassword: "+ req.body.password ,
+                                };
+                    
+                                transporter.sendMail(mailOptions, (error, info) => {
+                                    if (error) {
+                                        return console.log(error);
+                                    }
+                                    console.log('Message sent: %s', info.messageId);
+                                    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+                                    //   res.render('index.html');
+                                }); // end of transporter.sendmail
+
+
                                 res.redirect('/dashboard');
                             });
                         });

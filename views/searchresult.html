@@ -91,7 +91,7 @@
                     <li class="nav-item"><a href="#" class="nav-link">Help</a></li>
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Hi, <%= data.username %>
+                          Hi, <%= datas.username %>
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
@@ -143,7 +143,14 @@
                     <hr>
                 </tbody>
             </table>
+
+            
+            
         </div>
+        <form action="/addMarks" method="GET">
+            <div class="button" align="center"><button type="submit" class="btn btn-success">Add Marks</button></div>
+        </form>
+        
         <div class="button" align="center"><button type="submit" class="btn btn-success">Update</button></div>
         <div class="row">
             <footer class="col-md-12 fixed-bottom bg-dark text-white" align="center"><span>Team Members :&nbsp Sweta

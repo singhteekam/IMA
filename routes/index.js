@@ -144,6 +144,14 @@ app.get("/logout", function (req, res) {
     res.redirect("/");
 });
 
+app.get('/addMarks', (req, res)=>{
+    res.render('/addMarks')
+});
+
+app.post('/addMarks', (req, res)=>{
+    
+})
+
 module.exports=app;
 
 
