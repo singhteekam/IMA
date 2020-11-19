@@ -22,6 +22,7 @@
             display: -ms-flexbox; /* IE10 */
             display: flex;
             width: 100%;
+            
           }
           .icon {
             
@@ -39,9 +40,6 @@
               font-size: xx-large;
               align-items: left;
           }
-          .input-group a{
-              text-align: center;
-          }
     </style>
 </head>
 <body>
@@ -53,10 +51,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navBarRes">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/stuDash" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="" class="nav-link">About Us</a></li>
                     <li class="nav-item"><a href="" class="nav-link">Help</a></li>
-                    <!-- <li class="nav-item"><a href="/signUp" class="nav-link">SignUp</a></li> -->
                 </ul>
             </div>
         </div>
@@ -64,26 +61,25 @@
         <div class="container">
             <div class="form" >
                 <div class="button">
-                    <h2>Sign In</h2>
+                    <h2>Register</h2>
                 </div>  
-                <form id="login" class="input-group" action="/login" method="POST">
-                    <div class="input-container"><i class="fa fa-user icon"></i>&nbsp&nbsp&nbsp <input type="text"
-                    class="input-field pl-2"  name="email"  placeholder="Email"></div>
+                <form id="login" class="input-group" action="/addNewUser" method="POST">
+                    <div class="input-container"><i class="fa fa-user icon"></i>&nbsp&nbsp&nbsp <input type="text" class="input-field pl-2"  name="username"  placeholder="Username"></div>
+                    <div class="input-container"><i class="fa fa-envelope icon"></i>&nbsp&nbsp&nbsp <input type="email" class="input-field" name="email" placeholder="Email"></div>
+                    <div class="input-container"><i class="fa fa-phone icon"></i>&nbsp&nbsp&nbsp <input type="text" class="input-field" name="mobile" placeholder="Mobile. No"></div>
                     <div class="input-container"><i class="fa fa-lock icon"></i>&nbsp&nbsp&nbsp <input type="password" class="input-field" name="password" placeholder="Password"></div>
-                    
+                    <div class="input-container"><i class="fa fa-lock icon"></i>&nbsp&nbsp&nbsp <input type="password" class="input-field" name="confirmpassword" placeholder="Password"></div>
                     <div class="form-group">
-                        You are: <label class="radio-inline"><input type="radio" name="type" checked value="Admin" >Admin</label>
-                        &nbsp;&nbsp;
-                        <label class="radio-inline"><input type="radio" name="type" value="HOD">HOD</label>
-                        &nbsp;&nbsp;
-                        <label class="radio-inline"><input type="radio" name="type" value="Teacher">Teacher</label>
-                        &nbsp;&nbsp;
+                        <% if(req.user.type==="Teacher"){ %>
                         <label class="radio-inline"><input type="radio" name="type" value="Student">Student</label>
+                        <% } %>
+                        <% if(req.user.type==="HOD"){ %>
+                            <label class="radio-inline"><input type="radio" name="type" value="Teacher">Teacher</label>
+                        <% } %>
                       </div>
-
-                    <input type="submit"  class="submit-btn" name="" value="Login">
-                    <input type="text"  class="submit-btn" name="" value="Forgot Password?">
+                    <input type="submit"  class="submit-btn" name="" value="Register">
                 </form>
+                
             </div>    
         </div>
         <div class="row"><footer class="col-md-12 fixed-bottom bg-dark text-white" align="center"><span>Team Members :&nbsp Sweta Kumari,&nbsp Simran Gupta,&nbsp  Sneha Goel,&nbsp  Teekam Singh</span></footer></div>

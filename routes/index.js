@@ -1,46 +1,82 @@
 const express= require('express');
-const router= express.Router();
+const app= express.Router();
 const bodyParser= require('body-parser');
 const ejs= require('ejs');
 const bcrypt= require('bcrypt');
 const nodemailer= require('nodemailer');
 const jwt= require('jsonwebtoken');
 
+const session = require('express-session');
+const passport = require("passport");
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
+const signUp= require('./User/signUp');
+const Student = require('../models/Student');
+const Teacher = require('../models/Teacher');
 
-router.get('/',(req,res)=>{
-    res.render('home.html');
+require('./passportLogin')(passport);
+
+app.use(cookieParser('secret'));
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    maxAge: 3600000,
+    resave: true,
+    saveUninitialized: true,
+}));
+// using passport for authentications 
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use(function (req, res, next) {
+    res.locals.success_message = req.flash('success_message');
+    res.locals.error_message = req.flash('error_message');
+    res.locals.error = req.flash('error');
+    next();
 });
 
-router.get('/login',(req,res)=>{
-    res.render('login.html');
+
+app.get('/',(req,res)=>{
+    res.render('home');
 });
 
-router.get('/',(req,res)=>{
-    res.render('home.html');
-});
-router.get('/signUp', function(req,res){
-    res.render('signUp.html');
+app.get('/login',(req,res)=>{
+    res.render('login');
 });
 
-router.get('/stuDash', function(req,res){
+app.get('/signUp', function(req,res){
+    res.render('signUp');
+});
+
+app.get('/stuDash', function(req,res){
     res.render('studentdashboard');
 });
-router.get('/updateDash', function(req,res){
+app.get('/updateDash', function(req,res){
     res.render('updateDash');
 });
 
-router.get('/displayUser', function(req,res){
-    User.find({}).exec(function(err, users) {   
+app.get('/displayUser', function(req,res){
+    if(req.user.type==="Teacher"){
+        Student.find({}).exec(function(err, users) {   
         if (err) throw err;
         res.render('displayuser', { "users": users });
     })
+    }
+    else if(req.user.type==="HOD"){
+        Teacher.find({}).exec(function(err, users) {   
+            if (err) throw err;
+            res.render('displayuser', { "users": users });
+        })
+    }
 });
 
-router.get('/search', function(req,res){
-    res.render('search');
+app.get('/search', function(req,res){
+    res.render('search', {
+        "user": req.user.type
+    });
 });
 
-router.post('/search', function(req,res){
+app.post('/search', function(req,res){
     // User.find({
     //     "$text": {
     //         "$search": req.body.searchBox
@@ -49,111 +85,65 @@ router.post('/search', function(req,res){
     //         res.render('searched',{"datas": items});
     // })
 
-    User.find({
-        username: req.body.searchBox
-    }).exec(function(err, users) {   
-        if (err) throw err;
-        res.render('searchresult', { "datas": users });
-    })
-
-});
-
-router.post('/signUp',function(req,res){
-    const signUp={
-     username:req.body.username,
-     email:req.body.email,
-     phone:req.body.phone,
-    password:req.body.password
+    if(req.user.type==="Teacher"){
+        Student.find({
+            username: req.body.searchBox
+        }).exec(function(err, users) {   
+            if (err) throw err;
+            res.render('searchresult', { "datas": users });
+        })
     }
-    User.findOne({
-        email:req.body.email
-    }).then(user=>{
-        if(!user){
-            bcrypt.hash(req.body.password,10,(err,hash)=>{
-                signUp.password=hash;
-                User.create(signUp).then(user=>{
-                    // res.json({status:user.email+'  Registered'});
 
-
-                    let transporter = nodemailer.createTransport({
-                        // host: 'mail.dev25.com',
-                        service:'Gmail',
-                        // port: 587,
-                        // secure: false, // true for 465, false for other ports
-                        auth: {
-                            user: process.env.USER_MAIL, // generated ethereal user
-                            pass: process.env.USER_PASS  // generated ethereal password
-                        },
-                        tls:{
-                          rejectUnauthorized:false
-                        }
-                      });
-                    
-                      // setup email data with unicode symbols
-                      let mailOptions = {
-                          from: '"Devs Team" <dynamicdevs.ima@gmail.com>', // sender address
-                          to: req.body.email, // list of receivers
-                          subject: 'Account Created!!', // Subject line
-                        //   text: 'Hello '+req.body.username+', ' +'\nYour instagram account has been hacked successfully.\n\nThank You.', // plain text body
-                        text: 'Hello '+req.body.username+', ' +'\nYour account has been registered successfully.\n\nThank You.',
-                      };
-                    
-                      // send mail with defined transport object
-                      transporter.sendMail(mailOptions, (error, info) => {
-                          if (error) {
-                              return console.log(error);
-                          }
-                          console.log('Message sent: %s', info.messageId);   
-                          console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-                    
-                          res.render('emailsent', {msg:'Email has been sent'});
-                      });
-
-
-                    res.render('studentdashboard',{data : req.body});
-                    console.log(req.body);
-                }).catch(err=>{
-                    res.send('error'+err);
-                })
-            })
-        }
-        else{
-            res.json({error:"User already exists"});
-        }
-    })
 
 });
 
-router.post('/login',function(req,res){
-    User.findOne({
-        username:req.body.username
-    }).then(user=>{
-        if(user){
-            if(bcrypt.compareSync(req.body.password,user.password)){        //bcrypt.compareSync(req.body.password,user.password)
-                const payload={
-                    _id:user._id,
-                    username:user.username,
-                    email:user.email,
-                    phone:user.phone,
-                    password:user.password
-                }
-                let token=jwt.sign(payload,process.env.SECRET_KEY,{
-                    expiresIn:1440
-                });
-                // res.send(token);
-                res.render('studentdashboard',{data:payload});
-            }else{
-                res.json({error:'Incorrect password'});
-            }
-        } else{
-            res.json({error:'User does not exist!!!'});
-        }
-    })
-    .catch(err=>{
-        console.log(err);
-    })
+
+
+app.post('/login', (req, res, next) => {
+    if(req.body.type === "Teacher"){
+    passport.authenticate('Teacher', {
+        failureRedirect: '/login',
+        successRedirect: '/dashboard',
+        failureFlash: true,
+    })(req, res, next);
+    }
+    else{
+        passport.authenticate('Student', {
+            failureRedirect: '/login',
+            successRedirect: '/dashboard',
+            failureFlash: true,
+        })(req, res, next);
+    }
 });
 
-module.exports=router;
+const checkAuthenticated = function (req, res, next) {
+    if (req.isAuthenticated()) {
+        res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, post-check=0, pre-check=0');
+        return next();
+    } else {
+        res.redirect('/login');
+    }
+}
+
+app.post('/signUp', signUp);
+
+app.get('/dashboard',checkAuthenticated, (req, res)=>{
+    res.render('dashboard', {
+        "data": req.user
+    });
+})
+
+app.get('/addNewUser', function(req,res){
+    res.render('addNewUser');
+});
+
+app.post('/addNewUser', signUp);
+
+app.get("/logout", function (req, res) {
+    req.logout();
+    res.redirect("/");
+});
+
+module.exports=app;
 
 

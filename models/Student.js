@@ -4,20 +4,29 @@ const Schema=mongoose.Schema;
 const UserSchema=new Schema({
     username:{
         type:String,
-        required:true
+        required:false
     },
+    
     email:{
         type:String,
         required:true
     },
-    phone:{
+    mobile:{
         type:String,
-        required:true
+        required:false
     },
     password:{
         type:String,
         required:true
     },
+    type:{
+        type:String,
+        required:true
+    },
+    profilephoto:{
+        type: String,
+        default:""
+    }
 });
 
-module.exports=User=mongoose.model('users',UserSchema);
+module.exports=Student=mongoose.model('students',UserSchema);

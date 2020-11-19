@@ -3,7 +3,6 @@ const dotenv= require('dotenv');
 const bodyParser= require('body-parser');
 const ejs= require('ejs');
 const connectDB= require('./config/db');
-const User = require('./models/User');
 
 dotenv.config({path: '.env'});
 

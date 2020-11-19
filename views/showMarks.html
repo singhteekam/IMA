@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crap Basixs</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
+</head>
+<body>
+
+<div id="container">
+    <h1>Marks</h1>
+<button class="btn">Exam</button>
+<div class="dropdown">
+  <button class="btn" style="border-left:1px solid black">
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-content">
+    <a onclick=table1()>Sessional Test -1</a>
+    <a onclick=table2()>Sessional Test -2</a>
+    <a onclick=table3()>Pre University Exam</a>
+  </div>
+</div>
+
+<table id="table 1" class="center" style="display: none;">
+    <caption  style="font-size: larger; font-weight:bolder">Sessional Test -1</caption>
+    <tr>
+      <th>Subjects</th>
+      <th>Points Scored</th>
+      <th>Maximum points</th>
+    </tr>
+    <tr>
+      <td>physics</td>
+      <td>24</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>chemistry</td>
+      <td>23</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>maths</td>
+      <td>21</td>
+      <td>30</td>
+    </tr>
+  </table>
+
+  <table id="table 2" class="center" style="display:none">
+    <caption  style="font-size: larger; font-weight:bolder">Sessional Test -2</caption>
+    <tr>
+        <th>Subjects</th>
+        <th>Points Scored</th>
+        <th>Maximum points</th>
+      </tr>
+      <tr>
+        <td>physics</td>
+        <td>24</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>chemistry</td>
+        <td>23</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>maths</td>
+        <td>21</td>
+        <td>30</td>
+      </tr>
+    </table>
+
+  <table id="table 3" class="center" style="display: none;">
+    <caption style="font-size: larger; font-weight:bolder">PreUniversity Exam</caption>
+    <tr>
+        <th>Subjects</th>
+        <th>Points Scored</th>
+        <th>Maximum points</th>
+      </tr>
+      <tr>
+        <td>physics</td>
+        <td>24</td>
+        <td>50</td>
+      </tr>
+      <tr>
+        <td>chemistry</td>
+        <td>23</td>
+        <td>50</td>
+      </tr>
+      <tr>
+        <td>maths</td>
+        <td>21</td>
+        <td>50</td>
+      </tr>
+    </table>
+</div>
+<script>
+    function table1() {
+      var x = document.getElementById("table 1");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+    function table2() {
+        var x = document.getElementById("table 2");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+      function table3() {
+        var x = document.getElementById("table 3");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+    </script>
+    
+</body>
+</html>

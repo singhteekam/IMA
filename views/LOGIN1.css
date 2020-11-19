@@ -1,3 +1,4 @@
+
 *
 {
     margin:0;
@@ -21,7 +22,7 @@ body{
 .form
 {
     width:380px;
-    height:480px;
+    height:510px;
     position:relative;
     margin: 40px 150px 55px 460px;
     background: rgb(124, 110, 110);
@@ -33,7 +34,7 @@ body{
 {
     width:220px;
    /* margin:100px 135px 50px 100px;*/
-    margin:100px 135px;
+    margin:50px 100px;
     position:relative;
     border-radius:0px;
 	font-weight: bold;
@@ -68,7 +69,7 @@ body{
 }
 .input-group
 {
-    top:180px;
+    top:140px;
     position:absolute;
     width: 280px;
     transition:0.5s;
@@ -80,7 +81,7 @@ body{
 {
     width:100%;
     padding:10px 0;
-    margin:5px 0;
+    margin:4px 0;
     border-left:0;
     border-top:0;
     border-right:0;
@@ -99,7 +100,7 @@ input.submit-btn
     padding:10px 40px;
     cursor:pointer;
     display:block;
-    margin:25px 30px;
+    margin:10px 30px;
     background-image:linear-gradient(to right,#05D6D9,#085e5f);
     color:black;
     border:0;
@@ -152,6 +153,3 @@ a.nav-link:hover
    background-color:black;
    color : white;
 }
-
- 
-  
