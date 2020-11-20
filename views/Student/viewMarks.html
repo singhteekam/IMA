@@ -78,19 +78,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navBarRes">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="#" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="/dashboard" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">About </a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Help</a></li>
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Hi,
+                          Hi, <%= data.username %>
                         </a>
                         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="/search">Search user</a>
-                          <a class="dropdown-item" href="/signUp">Add user</a>
-                          <a class="dropdown-item" href="#">Delete user</a>
-                          <a class="dropdown-item" href="/displayUser">All users</a>
+                            <a class="dropdown-item" href="/viewMarksStu">View Marks</a>
+
                           <a class="dropdown-item" href="/logout">Log out</a>
                           
                         </div>
@@ -100,7 +98,7 @@
             </div>
         </div>
     </nav>
-<h1  id="heading">DASHBOARD</h2>
+<h1  id="heading">Dashboard</h2>
         
     </div>
     <div class="container">
@@ -136,23 +134,13 @@
 </div>
 
 <div class="container">
-    <form action="/addMarks?email= <%= data.email %>" method="POST">
 
-        <div class="input-group mb-3">
-            <div class="input-group-append">
-                <label class="input-group-text" for="inputGroupSelect02">Select Exam type</label>
-            </div>
-        <div>
-            <select class="custom-select" id="inputGroupSelect02" name="examType" required>
-                <option value="ST1" selected>ST 1</option>
-                <option value="ST2">ST 2</option>
-                <option value="PUE">PUE</option>
-              </select>
-        </div>
-        </div>
 
         <table class="table table-hover text-white">
             <tbody>
+                <tr>
+                    <th scope="row">Exam type: ST 1</th>
+                </tr>
                 <tr>
                     <th scope="row">Subject</th>
                     <th scope="row">Obtained Marks</th>
@@ -160,26 +148,93 @@
                   </tr>
               <tr>
                 <th scope="row">Physics</th>
-                <td><input type="text" name="physics" id=""></td>
-                <td><input type="text" name="physicsTM" id=""></td>
+                <td><%= data.physicsST1 %></td>
+                <td><%= data.physicsST1TM %></td>
+                
               </tr>
           
             <tr>
               <th scope="row">Chemistry</th>
-              <td><input type="text" name="chemistry" id=""></td>
-              <td><input type="text" name="chemistryTM" id=""></td>
+              <td><%= data.chemistryST1 %></td>
+                <td><%= data.chemistryST1TM %></td>
             </tr>
             <tr>
               <tr>
                   <th scope="row">Maths</th>
-                  <td><input type="text" name="maths" id=""></td>
-                  <td><input type="text" name="mathsTM" id=""></td>
+                  <td><%= data.mathsST1 %></td>
+                <td><%= data.mathsST1TM %></td>
               </tr>
             
             </tbody>
           </table>
-          <div class="button" align="center" ><a href="#"></a><button type="submit" class="btn btn-success" >Update</button></a></div>
-    </form>
+            <hr><hr>
+
+
+          <table class="table table-hover text-white">
+            <tbody>
+                <tr>
+                    <th scope="row">Exam type: ST 2</th>
+                </tr>
+                <tr>
+                    <th scope="row">Subject</th>
+                    <th scope="row">Obtained Marks</th>
+                    <th scope="row">Total Marks</th>
+                  </tr>
+              <tr>
+                <th scope="row">Physics</th>
+                <td><%= data.physicsST2 %></td>
+                <td><%= data.physicsST2TM %></td>
+                
+              </tr>
+          
+            <tr>
+              <th scope="row">Chemistry</th>
+              <td><%= data.chemistryST2 %></td>
+                <td><%= data.chemistryST2TM %></td>
+            </tr>
+            <tr>
+              <tr>
+                  <th scope="row">Maths</th>
+                  <td><%= data.mathsST2 %></td>
+                <td><%= data.mathsST2TM %></td>
+              </tr>
+            
+            </tbody>
+          </table>
+          <hr><hr>
+
+          <table class="table table-hover text-white">
+            <tbody>
+                <tr>
+                    <th scope="row">Exam type: PUE</th>
+                </tr>
+                <tr>
+                    <th scope="row">Subject</th>
+                    <th scope="row">Obtained Marks</th>
+                    <th scope="row">Total Marks</th>
+                  </tr>
+              <tr>
+                <th scope="row">Physics</th>
+                <td><%= data.physicsPUE %></td>
+                <td><%= data.physicsPUETM %></td>
+                
+              </tr>
+          
+            <tr>
+              <th scope="row">Chemistry</th>
+              <td><%= data.chemistryPUE %></td>
+                <td><%= data.chemistryPUETM %></td>
+            </tr>
+            <tr>
+              <tr>
+                  <th scope="row">Maths</th>
+                  <td><%= data.mathsPUE %></td>
+                <td><%= data.mathsPUETM %></td>
+              </tr>
+            
+            </tbody>
+          </table>
+
 </div>
 
 

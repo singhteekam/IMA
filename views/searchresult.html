@@ -137,8 +137,8 @@
                         <td><%= data.email %></td>
                     </tr>
                     <tr>
-                        <th scope="row">Phone</th>
-                        <td><%= data.phone %></td>
+                        <th scope="row">Mobile no:</th>
+                        <td><%= data.mobile %></td>
                     </tr>
                     <hr>
                 </tbody>
@@ -147,9 +147,11 @@
             
             
         </div>
-        <form action="/addMarks" method="GET">
-            <div class="button" align="center"><button type="submit" class="btn btn-success">Add Marks</button></div>
-        </form>
+
+        <div class="container" style="text-align: center;">
+            <a href="/addMarks?email= <%= data.email %> " class="btn text-center btn-outline-success" >Add Marks</a>
+        </div>
+
         
         <div class="button" align="center"><button type="submit" class="btn btn-success">Update</button></div>
         <div class="row">

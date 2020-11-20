@@ -4,7 +4,7 @@ const bodyParser= require('body-parser');
 const ejs= require('ejs');
 const bcrypt= require('bcrypt');
 const nodemailer= require('nodemailer');
-const jwt= require('jsonwebtoken');
+const mongoose = require('mongoose');
 
 const session = require('express-session');
 const passport = require("passport");
@@ -145,11 +145,64 @@ app.get("/logout", function (req, res) {
 });
 
 app.get('/addMarks', (req, res)=>{
-    res.render('/addMarks')
+    let email= req.query.email.trim();
+    Student.findOne({
+        email: email
+    }).then((user)=>{
+        res.render('addMarks', {
+            "data": user
+        })
+    })
 });
 
 app.post('/addMarks', (req, res)=>{
-    
+    let email = req.query.email.trim();
+    let updateData;
+    if(req.body.examType==="ST1"){
+    updateData = {
+        physicsST1: req.body.physics,
+        physicsST1TM: req.body.physicsTM,
+        chemistryST1: req.body.chemistry,
+        chemistryST1TM: req.body.chemistryTM,
+        mathsST1: req.body.maths,
+        mathsST1TM: req.body.mathsTM,
+     }
+    }
+    else if(req.body.examType==="ST2"){
+        updateData = {
+            physicsST2: req.body.physics,
+            physicsST2TM: req.body.physicsTM,
+            chemistryST2: req.body.chemistry,
+            chemistryST2TM: req.body.chemistryTM,
+            mathsST2: req.body.maths,
+            mathsST2TM: req.body.mathsTM,
+         }
+    }
+    else if(req.body.examType==="PUE"){
+        updateData = {
+            physicsPUE: req.body.physics,
+            physicsPUETM: req.body.physicsTM,
+            chemistryPUE: req.body.chemistry,
+            chemistryPUETM: req.body.chemistryTM,
+            mathsPUE: req.body.maths,
+            mathsPUETM: req.body.mathsTM,
+         }
+    }
+    Student.updateOne({
+        "email": email
+    }, {
+        $set: updateData
+    }).then((user)=>{
+        res.render('dashboard', {
+            "data": req.user
+        })
+    })
+});
+
+app.get("/viewMarksStu", (req, res)=>{
+    res.render('./Student/viewMarks', {
+        "data": req.user
+    })
 })
 
 module.exports=app;

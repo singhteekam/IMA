@@ -85,15 +85,25 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Hi, <%= data.username %>
                         </a>
-                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="/search">Search user</a>
-                          <a class="dropdown-item" href="/signUp">Add user</a>
-                          <a class="dropdown-item" href="#">Delete user</a>
-                          <a class="dropdown-item" href="/displayUser">All users</a>
-                          <a class="dropdown-item" href="/logout">Log out</a>
-                          
-                        </div>
+                        <% if(data.type==="Teacher") { %>
+                            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="/search">Search Student</a>
+                              <a class="dropdown-item" href="/signUp">Add Student</a>
+                              <a class="dropdown-item" href="#">Delete Student</a>
+                              <a class="dropdown-item" href="/displayUser">All Students</a>
+                              <a class="dropdown-item" href="/logout">Log out</a>
+                              
+                            </div>
+                            <% } else if(data.type==="Student") { %>
+                                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="/viewMarksStu">View Marks</a>
+
+                                  <a class="dropdown-item" href="/logout">Log out</a>
+                                  
+                                </div>
+                                <% } %>
                       </li>
                 </ul>
 				
